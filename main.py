@@ -34,6 +34,7 @@ def main():
 
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
 
     while True:
         screen.fill("black")
