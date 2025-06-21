@@ -34,26 +34,35 @@ def main():
 
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    
+
 
     while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+
         screen.fill("black")
 
         #player.draw(screen)
         
         for object in drawable:
             object.draw(screen)
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision(asteroid):
+                    shot.kill()
+                    asteroid.kill()
         
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
+
         dt = clock.tick(60) / 1000
         updatable.update(dt)
         for object in asteroids:
             if object.collision(player):
                 print("Game over")
                 sys.exit(0)
+
         pygame.display.flip()
 
 if __name__ == "__main__":
